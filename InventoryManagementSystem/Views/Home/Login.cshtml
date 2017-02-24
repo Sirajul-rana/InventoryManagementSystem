@@ -1,0 +1,27 @@
+﻿@model InventoryManagementSystem.Models.User
+@{
+    ViewBag.Title = "Login -";
+}
+
+<h2>Login</h2>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="container">
+        <div class="row main" style="background-color: darkgray">
+            <div>
+                <img src="~/Resources/browsertab.png" alt="" style="width: 200px;height: 200px" />
+            </div>
+            <div>
+                @Html.TextBox("username", null, new { @class = "form-control", PlaceHolder = "username" })
+            </div>
+            <div>
+                @Html.Password("password", null, new { @class = "form-control", PlaceHolder = "password" })
+            </div>
+            <div>
+                <input type="submit" id="btnLogin" class="btn btn-success" value="Login" />
+            </div>
+        </div>
+    </div>
+}
+
