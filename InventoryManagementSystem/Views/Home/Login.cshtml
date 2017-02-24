@@ -19,9 +19,44 @@
                 @Html.Password("password", null, new { @class = "form-control", PlaceHolder = "password" })
             </div>
             <div>
-                <input type="submit" id="btnLogin" class="btn btn-success" value="Login" />
+                <input type="submit" id="btnLogin" class="btn btn-success" value="Login"/>
+            </div>
+            <div>
+                <p id="span1"></p>
             </div>
         </div>
     </div>
 }
+
+<script>
+    $(document).ready(function() {
+        $("#btnLogin").click(function (e) {
+            e.preventDefault();
+            var data = { "txt_username": $("#username").val(), "txt_password": $("#password").val() }
+            $.ajax({
+                url: "/Home/CheckLogin",
+                data: JSON.stringify(data),
+                datatype: "json",
+                type: "POST",
+                contentType: "application/json",
+                success: function (status) {
+                    if (status !== "InvalidData")
+                    {
+                        window.location.href = "Home/Index";
+                    }
+                    else
+                    {
+                        $("#span1").css("display", "block");
+                        $("#span1").css("color", "red");
+                        $("#span1").html("Invalid User name or password");
+                    }
+                    //
+                },
+                error: function () {
+                    $("#span1").html("ERROR");
+                }
+            });
+        });
+    });
+</script>
 

@@ -1,0 +1,70 @@
+﻿@model IEnumerable<InventoryManagementSystem.Models.User>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.User_name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.User_email)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.User_contact)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.User_username)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.User_password)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.User_gender)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.User_type)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.User_name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.User_email)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.User_contact)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.User_username)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.User_password)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.User_gender)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.User_type)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.User_Id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.User_Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.User_Id })
+        </td>
+    </tr>
+}
+
+</table>
