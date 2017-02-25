@@ -16,7 +16,6 @@ namespace InventoryManagementSystem.Context
         public DbSet<Product> Products { get; set; }
         public DbSet<Purchase> Purcheses { get; set; }
         public DbSet<Service> Services { get; set; }
-        public DbSet<Size> Sizes { get; set; }
         public DbSet<Sub_Category> SubCategories { get; set; }
         public DbSet<User> Users { get; set; }
     }

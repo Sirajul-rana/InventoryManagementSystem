@@ -1,0 +1,27 @@
+﻿body {
+}
+
+
+.main {
+    max-width: 25%;
+    display: block;
+    margin: auto;
+    padding-top: 80px;
+
+}
+
+.main > div > img {
+    display: block;
+    margin: auto;
+}
+
+
+#username {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    max-width: 100%;
+}
+#password {
+    margin-bottom: 5px;
+    max-width: 100%;
+}

@@ -1,22 +1,19 @@
-﻿@model InventoryManagementSystem.Models.User
-@{
+﻿@{
     ViewBag.Title = "Login -";
 }
 
-<h2>Login</h2>
-@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
     <div class="container">
-        <div class="row main" style="background-color: darkgray">
+        <div class="row main">
             <div>
                 <img src="~/Resources/browsertab.png" alt="" style="width: 200px;height: 200px" />
             </div>
             <div>
-                @Html.TextBox("username", null, new { @class = "form-control", PlaceHolder = "username" })
+                @Html.TextBox("username", null, new { @class = "form-control", @PlaceHolder = "username", @id = "username" })
+                <p id="usernamevalid"></p>
             </div>
             <div>
-                @Html.Password("password", null, new { @class = "form-control", PlaceHolder = "password" })
+                @Html.Password("password", null, new { @class = "form-control", @PlaceHolder = "password", @id = "password" })
+                <p id="passwordvalid"></p>
             </div>
             <div>
                 <input type="submit" id="btnLogin" class="btn btn-success" value="Login"/>
@@ -26,36 +23,52 @@
             </div>
         </div>
     </div>
-}
 
 <script>
     $(document).ready(function() {
         $("#btnLogin").click(function (e) {
-            e.preventDefault();
-            var data = { "txt_username": $("#username").val(), "txt_password": $("#password").val() }
-            $.ajax({
-                url: "/Home/CheckLogin",
-                data: JSON.stringify(data),
-                datatype: "json",
-                type: "POST",
-                contentType: "application/json",
-                success: function (status) {
-                    if (status !== "InvalidData")
-                    {
-                        window.location.href = "Home/Index";
+            if (!$("#username").val()) {
+
+                $("#usernamevalid").css("display", "block");
+                $("#usernamevalid").css("color", "red");
+                $("#usernamevalid").html("Type username");
+            }
+            else if (!$("#password").val()) {
+                $("#usernamevalid").empty();
+                $("#passwordvalid").css("display", "block");
+                $("#passwordvalid").css("color", "red");
+                $("#passwordvalid").html("Type Password");
+            }
+            else {
+                $("#passwordvalid").empty();
+                e.preventDefault();
+                var data = { "txt_username": $("#username").val(), "txt_password": $("#password").val() }
+                $.ajax({
+                    url: "/Home/CheckLogin",
+                    data: JSON.stringify(data),
+                    datatype: "json",
+                    type: "POST",
+                    contentType: "application/json",
+                    success: function (status) {
+                        if (status !== "InvalidData") {
+                            if (status === "Admin") {
+                                window.location.href = "Admin/Index";
+                            } else if (status === "User") {
+                                window.location.href = "User/Index";
+                            }
+                        }
+                        else {
+                            $("#span1").css("display", "block");
+                            $("#span1").css("color", "red");
+                            $("#span1").html("Invalid username or password");
+                        }
+                        //
+                    },
+                    error: function () {
+                        $("#span1").html("ERROR");
                     }
-                    else
-                    {
-                        $("#span1").css("display", "block");
-                        $("#span1").css("color", "red");
-                        $("#span1").html("Invalid User name or password");
-                    }
-                    //
-                },
-                error: function () {
-                    $("#span1").html("ERROR");
-                }
-            });
+                });
+            }
         });
     });
 </script>

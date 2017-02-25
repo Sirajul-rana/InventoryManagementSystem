@@ -14,20 +14,27 @@ namespace InventoryManagementSystem.Controllers
         // GET: Home
         public ActionResult Index()
         {
-            return View(Context.Users.ToList());
+            if (Session["user"] == null)
+            {
+                return RedirectToAction("Login", "Home");
+            }
+            else
+            {
+                return View(Context.Users.ToList());
+            }
         }
+        [HttpGet]
         public ActionResult Login()
         {
             return View();
         }
-
         public JsonResult CheckLogin(string txt_username, string txt_password)
         {
-            
             var loginresult = Context.Users.FirstOrDefault(u => u.User_username == txt_username && u.User_password == txt_password);
             if (loginresult != null)
             {
-                return Json(loginresult.User_username, JsonRequestBehavior.AllowGet);
+                Session["user"] = loginresult;
+                return Json(loginresult.User_type, JsonRequestBehavior.AllowGet);
             }
             return Json("InvalidData", JsonRequestBehavior.AllowGet);
         }
