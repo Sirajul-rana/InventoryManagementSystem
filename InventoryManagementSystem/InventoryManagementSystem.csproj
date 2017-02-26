@@ -127,6 +127,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\alertify\alertify.bootstrap.css" />
+    <Content Include="Content\alertify\alertify.core.css" />
+    <Content Include="Content\alertify\alertify.default.css" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -157,6 +160,8 @@
     <Content Include="Resources\browsertab.png" />
     <Content Include="Resources\HomeImage.png" />
     <Content Include="Resources\success.png" />
+    <Content Include="Scripts\alertify\alertify.js" />
+    <Content Include="Scripts\alertify\alertify.min.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
@@ -206,9 +211,9 @@
     <Content Include="Views\Admin\Index.cshtml" />
     <Content Include="Views\User\Index.cshtml" />
     <Content Include="Views\Admin\CreateProduct.cshtml" />
-    <Content Include="Views\Admin\CreateCategory.cshtml" />
     <Content Include="Views\Admin\CreateSubCategory.cshtml" />
     <Content Include="Views\Admin\CreateUser.cshtml" />
+    <Content Include="Views\Admin\CreateCategory.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

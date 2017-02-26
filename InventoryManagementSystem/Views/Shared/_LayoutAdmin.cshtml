@@ -14,6 +14,9 @@
     <script src="~/Scripts/modernizr-2.6.2.js"></script>
     <script src="~/Scripts/jquery-1.10.2.min.js"></script>
     <script src="~/Scripts/bootstrap.min.js"></script>
+    <link href="~/Content/alertify/alertify.core.css" rel="stylesheet" />
+    <script src="~/Scripts/alertify/alertify.min.js"></script>
+    <link href="~/Content/alertify/alertify.default.css" rel="stylesheet"/>
 </head>
 <body>
 <div id="wrapper">
@@ -69,7 +72,7 @@
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
                 <ul class="nav navbar-nav side-nav">
                     <li class="active">
-                        <a href="#"><i class="fa fa-fw fa-dashboard"></i> Dashboard</a>
+                        <a href="@Url.Action("Index", "Admin")"><i class="fa fa-fw fa-dashboard"></i> Dashboard</a>
                     </li>
                     <li>
                         <a href="#"><i class="fa fa-fw fa-bar-chart-o"></i> Charts</a>

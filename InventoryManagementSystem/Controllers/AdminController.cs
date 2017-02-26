@@ -52,9 +52,37 @@ namespace InventoryManagementSystem.Controllers
             }
             else
             {
+                User user = (User)Session["user"];
+                ViewBag.name = user.User_name;
                 return View();
             }
         }
+        public JsonResult SaveCategory(string txt_category)
+        {
+            if (txt_category != null)
+            {
+                Category category = new Category();
+                category.Category_name = txt_category;
+                Context.Categories.Add(category);
+                Context.SaveChanges();
+                return Json("Success", JsonRequestBehavior.AllowGet);
+            }
+            return Json("InvalidData", JsonRequestBehavior.AllowGet);
+        }
+        //[HttpPost]
+        //public ActionResult CreateCategory(Category category)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        Context.Categories.Add(category);
+        //        Context.SaveChanges();
+        //        return RedirectToAction("Index", "Admin");
+        //    }
+        //    else
+        //    {
+        //        return View(category);
+        //    }
+        //}
 
         [HttpGet]
         public ActionResult CreateSubCategory()
@@ -65,9 +93,42 @@ namespace InventoryManagementSystem.Controllers
             }
             else
             {
+                User user = (User)Session["user"];
+                ViewBag.name = user.User_name;
+                ViewData["category"] = new SelectList(Context.Categories, "Category_Id", "Category_name");
                 return View();
             }
         }
+
+        public JsonResult SaveSubCategory(string txt_subcategory, string txt_categoryid)
+        {
+            if (txt_subcategory != null && txt_categoryid != null)
+            {
+                Sub_Category subCategory = new Sub_Category();
+                subCategory.Sub_Category_name = txt_subcategory;
+                subCategory.Category_Id = Convert.ToInt32(txt_categoryid);
+                Context.SubCategories.Add(subCategory);
+                Context.SaveChanges();
+                return Json("Success", JsonRequestBehavior.AllowGet);
+            }
+            return Json("InvalidData", JsonRequestBehavior.AllowGet);
+        }
+        //[HttpPost]
+        //public ActionResult CreateSubCategory(Sub_Category subCategory)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        string category_id = Request.Form["category"].ToString();
+        //        subCategory.Category_Id = Convert.ToInt32(category_id);
+        //        Context.SubCategories.Add(subCategory);
+        //        Context.SaveChanges();
+        //        return RedirectToAction("Index", "Admin");
+        //    }
+        //    else
+        //    {
+        //        return View(subCategory);
+        //    }
+        //}
 
         [HttpGet]
         public ActionResult CreateUser()
@@ -78,6 +139,8 @@ namespace InventoryManagementSystem.Controllers
             }
             else
             {
+                User user = (User)Session["user"];
+                ViewBag.name = user.User_name;
                 return View();
             }
         }

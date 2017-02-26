@@ -5,80 +5,161 @@
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
 
-<h2>CreateUser</h2>
+<h2>Adding User</h2>
 
-@using (Html.BeginForm()) 
-{
-    @Html.AntiForgeryToken()
-    
-    <div class="form-horizontal">
-        <h4>User</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
-            @Html.LabelFor(model => model.User_name, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.User_name, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.User_name, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.User_email, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.User_email, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.User_email, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.User_contact, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.User_contact, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.User_contact, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.User_username, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.User_username, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.User_username, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.User_password, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.User_password, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.User_password, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.User_gender, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.User_gender, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.User_gender, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.User_type, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.User_type, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.User_type, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
-            </div>
+<div class="form-horizontal">
+    <hr/>
+    <div class="form-group">
+        @Html.Label("Name", htmlAttributes: new {@class = "control-label col-md-2"})
+        <div class="col-md-10">
+            @Html.TextBox("name", null, new {@class = "form-control", @placeholder = "Enter name", @id = "name"})
+            <p id="nameValid"></p>
         </div>
     </div>
-}
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
+    <div class="form-group">
+        @Html.Label("Email", htmlAttributes: new {@class = "control-label col-md-2"})
+        <div class="col-md-10">
+            @Html.TextBox("email", null, new {@class = "form-control", @placeholder = "Enter email", @id = "email"})
+            <p id="emailValid"></p>
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.Label("Phone number", htmlAttributes: new {@class = "control-label col-md-2"})
+        <div class="col-md-10">
+            @Html.TextBox("contact", null, new {@class = "form-control", @placeholder = "Enter mobile number", @id = "conteact", @min = "0", @type = "Number"})
+            <p id="contactValid"></p>
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.Label("Username", htmlAttributes: new {@class = "control-label col-md-2"})
+        <div class="col-md-10">
+            @Html.TextBox("username", null, new {@class = "form-control", @placeholder = "Enter username", @id = "usernamee"})
+            <p id="usernameValid"></p>
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.Label("Password", htmlAttributes: new {@class = "control-label col-md-2"})
+        <div class="col-md-10">
+            @Html.TextBox("password", null, new {@class = "form-control", @placeholder = "Enter password", @id = "passwordd"})
+            <p id="passwordValid"></p>
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.Label("Gender", htmlAttributes: new {@class = "control-label col-md-2"})
+        <div class="col-md-10">
+            @Html.DropDownList("gender", new List<SelectListItem>
+            {
+                new SelectListItem {Text = "Male", Value = "Male"},
+                new SelectListItem {Text = "Female", Value = "Female"}
+            }, "--- Select your gender ---", new {@class = "form-control", @id = "gender"})
+            <p id="genderValid"></p>
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.Label("User type", htmlAttributes: new {@class = "control-label col-md-2"})
+        <div class="col-md-10">
+            @Html.DropDownList("usertype", new List<SelectListItem>
+            {
+                new SelectListItem {Text = "User", Value = "User"},
+                new SelectListItem {Text = "Admin", Value = "Admin"}
+            }, "--- Select user type---", new {@class = "form-control", @id = "usertype"})
+            <p id="usertypeValid"></p>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Save" class="btn btn-success" id="saveUser"/>
+        </div>
+    </div>
 </div>
+
+<script>
+    $(document).ready(function() {
+        $("#name").val('');
+
+        $("#saveUser").click(function (e) {
+            if (!$("#name").val()) {
+                $("#nameValid").css("display", "block");
+                $("#nameValid").css("color", "red");
+                $("#nameValid").html("Type your name.");
+            }
+            else if (!$("#email").val()) {
+                $("#nameValid").empty();
+                $("#emailValid").css("display", "block");
+                $("#emailValid").css("color", "red");
+                $("#emailValid").html("Type email address.");
+            } else if (!$("#contact").val()) {
+                $("#emailValid").empty();
+                $("#contactValid").css("display", "block");
+                $("#contactValid").css("color", "red");
+                $("#contactValid").html("Type mobile number.");
+            } else if (!$("#usernamee").val()) {
+                $("#contactValid").empty();
+                $("#usernameValid").css("display", "block");
+                $("#usernameValid").css("color", "red");
+                $("#usernameValid").html("Type username.");
+            } else if (!$("#passwordd").val()) {
+                $("#usernameValid").empty();
+                $("#passwordValid").css("display", "block");
+                $("#passwordValid").css("color", "red");
+                $("#passwordValid").html("Type password.");
+            } else if (!$("#gender").val()) {
+                $("#passwordValid").empty();
+                $("#genderValid").css("display", "block");
+                $("#genderValid").css("color", "red");
+                $("#genderValid").html("Select your gender.");
+            } else if (!$("#usertype").val()) {
+                $("#genderValid").empty();
+                $("#usertypeValid").css("display", "block");
+                $("#usertypeValid").css("color", "red");
+                $("#usertypeValid").html("Select a user-type.");
+            }
+            else {
+                $("#nameValid").empty();
+                $("#emailValid").empty();
+                $("#contactValid").empty();
+                $("#usernameValid").empty();
+                $("#passwordValid").empty();
+                $("#genderValid").empty();
+                $("#usertypeValid").empty();
+                e.preventDefault();
+                var data = { "txt_subcategory": $("#subcategory").val(), "txt_categoryid": $("#categoryid").val() }
+                $.ajax({
+                    url: "/Admin/SaveSubCategory",
+                    data: JSON.stringify(data),
+                    datatype: "json",
+                    type: "POST",
+                    contentType: "application/json",
+                    success: function (status) {
+                        if (status !== "InvalidData") {
+                            if (status === "Success") {
+                                alertify.success("Added Successfully");
+                                $("#name").val();
+                                $("#email").val();
+                                $("#contact").val();
+                                $("#usernamee").val();
+                                $("#passwordd").val();
+                                $("#gender").val('');
+                                $("#usertype").val('');
+                            }
+                        }
+                        else {
+                            alertify.error("Something went wrong");
+                        }
+                    },
+                    error: function () {
+                        $("#span1").html("ERROR");
+                    }
+                });
+            }
+        });
+    })
+</script>
+
